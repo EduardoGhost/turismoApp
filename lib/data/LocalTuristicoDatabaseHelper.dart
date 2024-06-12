@@ -1,15 +1,15 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
+class LocalTuristicoDatabaseHelper {
 
   // Singleton pattern
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
-  factory DatabaseHelper() => _instance;
+  static final LocalTuristicoDatabaseHelper _instance = LocalTuristicoDatabaseHelper._internal();
+  factory LocalTuristicoDatabaseHelper() => _instance;
 
   static Database? _database;
 
-  DatabaseHelper._internal();
+  LocalTuristicoDatabaseHelper._internal();
 
   // Getter for the database.
   Future<Database> get database async {
@@ -18,13 +18,13 @@ class DatabaseHelper {
     return _database!;
   }
 
-  // Initializes the database of users.
+  // Initializes the database for localTuristico.
   Future<Database> _initDatabase() async {
     return openDatabase(
-      join(await getDatabasesPath(), 'user_database.db'),
+      join(await getDatabasesPath(), 'local_turistico_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE users(id TEXT PRIMARY KEY, name TEXT, email TEXT, avatarUrl TEXT, age INT, password TEXT)",
+          "CREATE TABLE local_turistico(id TEXT PRIMARY KEY, name TEXT, description TEXT, location TEXT, image TEXT)",
         );
       },
       version: 1,
@@ -34,7 +34,6 @@ class DatabaseHelper {
   // Inserts a record into the specified table.
   Future<int> insert(String table, Map<String, dynamic> data) async {
     final db = await database;
-    print("Dados inseridos ${data}");
     return await db.insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
@@ -47,7 +46,6 @@ class DatabaseHelper {
   // Updates a record in the specified table.
   Future<int> update(String table, Map<String, dynamic> data, String id) async {
     final db = await database;
-    print("Dados atualizados ${data}");
     return await db.update(table, data, where: 'id = ?', whereArgs: [id]);
   }
 
@@ -57,5 +55,3 @@ class DatabaseHelper {
     return await db.delete(table, where: 'id = ?', whereArgs: [id]);
   }
 }
-
-
