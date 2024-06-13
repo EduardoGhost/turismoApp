@@ -111,6 +111,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: Text('Entrar como visitante'),
               ),
+              TextButton(
+                //ir para dashboard
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/dashboard');
+                },
+                child: Text('Visualizar locais turisticos'),
+              ),
             ],
           ),
         ),

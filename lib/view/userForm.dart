@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
-import '../providers/users.dart';
+import '../providers/userProviders.dart';
 
 class userForm extends StatelessWidget{
 
@@ -39,7 +39,7 @@ class userForm extends StatelessWidget{
               if (isValid) {
                 _form.currentState?.save();
 
-                Provider.of<Users>(context, listen: false).put(
+                Provider.of<UsersProviders>(context, listen: false).put(
                   User(
                     id: _formData['id'] ?? '',
                     name: _formData['name'] ?? '',

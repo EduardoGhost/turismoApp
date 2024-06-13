@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/routers/app_routers.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
-import '../providers/users.dart';
+import '../providers/userProviders.dart';
 
 class UserTile extends StatelessWidget{
   final User user;
-  const UserTile(this.user);
+  const UserTile(this.user, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ return ListTile(
           )
           ).then((confirmed){
             if(confirmed){
-              Provider.of<Users>(context, listen: false).remove(user);
+              Provider.of<UsersProviders>(context, listen: false).remove(user);
             }
           });
           },

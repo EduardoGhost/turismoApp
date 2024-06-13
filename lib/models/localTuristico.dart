@@ -1,13 +1,15 @@
-class localTuristico {
+class LocalTuristico {
   final String id;
   final String name;
+  final String description;
   final String image;
   final String local;
   // final String produtos;
 
-  localTuristico({
+  LocalTuristico({
     required this.id,
     required this.name,
+    required this.description,
     required this.image,
     required this.local
   });
@@ -17,15 +19,17 @@ class localTuristico {
     return {
       'id': id,
       'name': name,
+      'description': description,
       'image': image,
       'local': local,
     };
   }
 
-  factory localTuristico.fromMap(Map<String, dynamic> map) {
-    return localTuristico(
+  factory LocalTuristico.fromMap(Map<String, dynamic> map) {
+    return LocalTuristico(
       id: map['id'],
       name: map['name'],
+      description: map['description'],
       image: map['image'],
       local: map['local'],
     );
