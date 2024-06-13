@@ -4,7 +4,7 @@ import 'package:flutter_project/data/UserRepository.dart';
 import '../models/user.dart';
 import 'package:flutter/foundation.dart';
 
-class Users with ChangeNotifier {
+class UsersProviders with ChangeNotifier {
   final Map<String, User> _items = {};
   final UserRepository _userRepository = UserRepository();
 
