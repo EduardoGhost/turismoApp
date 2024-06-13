@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/components/user_tile.dart';
-import 'package:flutter_project/routers/app_routers.dart';
 import 'package:provider/provider.dart';
+import '../components/user_tile.dart';
 import '../providers/userProviders.dart';
+import '../routers/app_routers.dart';
 
 class userList extends StatelessWidget{
 

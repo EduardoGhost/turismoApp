@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/models/localTuristico.dart';
 import 'package:provider/provider.dart';
+import '../models/localTuristico.dart';
 import '../providers/locaisTuristicosProvider.dart';
 import '../routers/app_routers.dart';
 
@@ -27,7 +27,7 @@ class Local_Tile extends StatelessWidget{
               color: Colors.blue,
               onPressed: () {
                 Navigator.of(context).pushNamed
-                  (AppRouters.USER_FORM,
+                  (AppRouters.LOCALTURISTICO_FORM,
                   arguments: localTuristico,
                 );
               },

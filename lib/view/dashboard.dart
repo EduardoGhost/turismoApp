@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/components/local_Tile.dart';
-import 'package:flutter_project/routers/app_routers.dart';
 import 'package:provider/provider.dart';
+import '../components/local_Tile.dart';
 import '../providers/locaisTuristicosProvider.dart';
+import '../routers/app_routers.dart';
 
-//tela com uma lista d elocais turisticos
 class dashboard extends StatelessWidget{
 
   @override
@@ -18,7 +17,7 @@ class dashboard extends StatelessWidget{
           IconButton(icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushNamed(
-                  AppRouters.USER_FORM);
+                  AppRouters.LOCALTURISTICO_FORM);
             },
           ),
         ],

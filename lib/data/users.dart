@@ -1,4 +1,4 @@
-import 'package:flutter_project/models/user.dart';
+
 
 //dados de testes inicias
 const USERSDATA = {
@@ -20,5 +20,9 @@ const USERSDATA = {
   //     'Fulano@gmail.com',
   //     'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash&f=y'
   // ),
+
+  //locais
+  //https://images.vittocdn.com.br/lanchoneteportal81/uploads/a31c6e365d708b903f05327a1e0bed2d.png
+
 };
 

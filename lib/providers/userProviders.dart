@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_project/data/UserRepository.dart';
+import '../data/UserRepository.dart';
 import '../models/user.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,7 +8,7 @@ class UsersProviders with ChangeNotifier {
   final Map<String, User> _items = {};
   final UserRepository _userRepository = UserRepository();
 
-  Users() {
+  UsersProviders() {
     _loadUsers();
   }
 

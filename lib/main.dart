@@ -1,12 +1,13 @@
+import 'package:AppTuristico/providers/locaisTuristicosProvider.dart';
+import 'package:AppTuristico/providers/userProviders.dart';
+import 'package:AppTuristico/routers/app_routers.dart';
+import 'package:AppTuristico/view/LoginScreen.dart';
+import 'package:AppTuristico/view/dashboard.dart';
+import 'package:AppTuristico/view/localTuristicoForm.dart';
+import 'package:AppTuristico/view/userDetail.dart';
+import 'package:AppTuristico/view/userForm.dart';
+import 'package:AppTuristico/view/userList.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/providers/locaisTuristicosProvider.dart';
-import 'package:flutter_project/providers/userProviders.dart';
-import 'package:flutter_project/routers/app_routers.dart';
-import 'package:flutter_project/view/LoginScreen.dart';
-import 'package:flutter_project/view/dashboard.dart';
-import 'package:flutter_project/view/userDetail.dart';
-import 'package:flutter_project/view/userForm.dart';
-import 'package:flutter_project/view/userList.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (ctx) => LocalTuristicoProviders()),
                     ],
     child: MaterialApp(
-      title: 'Flutter Demo',
+      title: 'AppTuristico',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         AppRouters.USER_FORM: (_) => userForm(),
         AppRouters.USER_DETAILS: (_) => userDetail(),
         AppRouters.USER_LOGIN: (_) => LoginScreen(),
+        AppRouters.LOCALTURISTICO_FORM: (_) => LocalTuristicoForm(),
 
 
       },

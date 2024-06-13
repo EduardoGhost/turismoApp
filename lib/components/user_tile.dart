@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/routers/app_routers.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
 import '../providers/userProviders.dart';
+import '../routers/app_routers.dart';
 
 class UserTile extends StatelessWidget{
   final User user;

@@ -4,12 +4,11 @@ import 'package:flutter/foundation.dart';
 import '../data/localTuristicoRepository.dart';
 import '../models/localTuristico.dart';
 
-
 class LocalTuristicoProviders with ChangeNotifier {
   final Map<String, LocalTuristico> _items = {};
   final LocalTuristicoRepository _locaisRepository = LocalTuristicoRepository();
 
-  LocaisTuristicos() {
+  LocalTuristicoProviders() {
     _loadLocais();
   }
 
@@ -34,27 +33,29 @@ class LocalTuristicoProviders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> put(LocalTuristico local) async {
-    if (local == null) return;
+  Future<void> put(LocalTuristico localTuristico) async {
+    if (localTuristico == null) return;
 
-    if (local.id.isNotEmpty && _items.containsKey(local.id)) {
-      _items.update(local.id, (_) => LocalTuristico(
-        id: local.id,
-        name: local.name,
-        description: local.description,
-        image: local.image,
-        local: local.local,
+    if (localTuristico.id.isNotEmpty && _items.containsKey(localTuristico.id)) {
+      _items.update(localTuristico.id, (_) => LocalTuristico(
+        id: localTuristico.id,
+        name: localTuristico.name,
+        description: localTuristico.description,
+        image: localTuristico.image,
+        local: localTuristico.local,
+        hours: localTuristico.hours,
       ));
 
-      await _locaisRepository.updateLocalTuristico(local);
+      await _locaisRepository.updateLocalTuristico(localTuristico);
     } else {
       final id = Random().nextDouble().toString();
       final newLocal = LocalTuristico(
         id: id,
-        name: local.name,
-        description: local.description,
-        image: local.image,
-        local: local.local,
+        name: localTuristico.name,
+        description: localTuristico.description,
+        image: localTuristico.image,
+        local: localTuristico.local,
+        hours: localTuristico.hours,
       );
       _items[id] = newLocal;
       await _locaisRepository.insertLocalTuristico(newLocal);

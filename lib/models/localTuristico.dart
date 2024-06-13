@@ -1,19 +1,19 @@
 class LocalTuristico {
-  final String id;
-  final String name;
-  final String description;
-  final String image;
-  final String local;
-  // final String produtos;
+  String id;
+  String name;
+  String description;
+  String image;
+  String local;
+  String hours;
 
   LocalTuristico({
     required this.id,
     required this.name,
     required this.description,
     required this.image,
-    required this.local
+    required this.local,
+    required this.hours,
   });
-
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,6 +22,7 @@ class LocalTuristico {
       'description': description,
       'image': image,
       'local': local,
+      'hours': hours,
     };
   }
 
@@ -32,6 +33,7 @@ class LocalTuristico {
       description: map['description'],
       image: map['image'],
       local: map['local'],
+      hours: map['hours'],
     );
   }
 }

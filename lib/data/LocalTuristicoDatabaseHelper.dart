@@ -2,7 +2,6 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LocalTuristicoDatabaseHelper {
-
   // Singleton pattern
   static final LocalTuristicoDatabaseHelper _instance = LocalTuristicoDatabaseHelper._internal();
   factory LocalTuristicoDatabaseHelper() => _instance;
@@ -24,7 +23,7 @@ class LocalTuristicoDatabaseHelper {
       join(await getDatabasesPath(), 'local_turistico_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE local_turistico(id TEXT PRIMARY KEY, name TEXT, description TEXT, location TEXT, image TEXT)",
+          "CREATE TABLE locais_turisticos(id TEXT PRIMARY KEY, name TEXT, description TEXT, image TEXT, local TEXT, hours TEXT)",
         );
       },
       version: 1,
@@ -34,6 +33,7 @@ class LocalTuristicoDatabaseHelper {
   // Inserts a record into the specified table.
   Future<int> insert(String table, Map<String, dynamic> data) async {
     final db = await database;
+    print("Dados turisticos inseridos ${data}");
     return await db.insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
