@@ -5,5 +5,6 @@ class AppRouters{
   static const USER_LOGIN = '/user-login';
   static const DASHBOARD = '/dashboard';
   static const LOCALTURISTICO_FORM = '/local-turistico';
+  static const LOCALTURISTICO_DETAIL = '/localDetail';
 
 }

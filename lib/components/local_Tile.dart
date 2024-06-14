@@ -7,7 +7,7 @@ import '../routers/app_routers.dart';
 
 class Local_Tile extends StatelessWidget{
   final LocalTuristico localTuristico;
-  const Local_Tile(this.localTuristico);
+  const Local_Tile(this.localTuristico, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class Local_Tile extends StatelessWidget{
       ),
       onTap: () {
         Navigator.of(context).pushNamed(
-          AppRouters.USER_DETAILS,
+          AppRouters.LOCALTURISTICO_DETAIL,
           arguments: localTuristico,
         );
       },

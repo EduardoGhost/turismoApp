@@ -3,6 +3,7 @@ import 'package:AppTuristico/providers/userProviders.dart';
 import 'package:AppTuristico/routers/app_routers.dart';
 import 'package:AppTuristico/view/LoginScreen.dart';
 import 'package:AppTuristico/view/dashboard.dart';
+import 'package:AppTuristico/view/localDetail.dart';
 import 'package:AppTuristico/view/localTuristicoForm.dart';
 import 'package:AppTuristico/view/userDetail.dart';
 import 'package:AppTuristico/view/userForm.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         AppRouters.USER_DETAILS: (_) => userDetail(),
         AppRouters.USER_LOGIN: (_) => LoginScreen(),
         AppRouters.LOCALTURISTICO_FORM: (_) => LocalTuristicoForm(),
+        AppRouters.LOCALTURISTICO_DETAIL: (_) => localDetail(),
 
 
       },
