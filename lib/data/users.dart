@@ -23,6 +23,7 @@ const USERSDATA = {
 
   //locais
   //https://images.vittocdn.com.br/lanchoneteportal81/uploads/a31c6e365d708b903f05327a1e0bed2d.png
+  //https://files.menudino.com/cardapios/52305/logo.png
 
 };
 

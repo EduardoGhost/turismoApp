@@ -4,6 +4,7 @@ class LocalTuristico {
   String description;
   String image;
   String local;
+  //implementar metodo para horario de abertura e fechamento
   String hours;
 
   LocalTuristico({

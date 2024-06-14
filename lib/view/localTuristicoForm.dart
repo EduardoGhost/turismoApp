@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../models/localTuristico.dart';
 import '../providers/locaisTuristicosProvider.dart';
 
-
 class LocalTuristicoForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
