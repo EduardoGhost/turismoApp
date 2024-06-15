@@ -14,9 +14,10 @@ class LocalTuristicoForm extends StatelessWidget {
       _formData['id'] = local.id;
       _formData['name'] = local.name;
       _formData['description'] = local.description;
-      _formData['imageUrl'] = local.image;
+      _formData['image'] = local.image;
       _formData['location'] = local.local;
       _formData['hours'] = local.hours;
+      _formData['contact'] = local.contact;
     }
   }
 
@@ -45,6 +46,7 @@ class LocalTuristicoForm extends StatelessWidget {
                     image: _formData['imageUrl'] ?? '',
                     local: _formData['location'] ?? '',
                     hours: _formData['hours'] ?? '',
+                    contact: _formData['contact'] ?? '',
                   ),
                 );
 
@@ -111,6 +113,17 @@ class LocalTuristicoForm extends StatelessWidget {
                   return null;
                 },
                 onSaved: (value) => _formData['hours'] = value!,
+              ),
+              TextFormField(
+                initialValue: _formData['contact'],
+                decoration: const InputDecoration(labelText: "Contato"),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Contato inválido";
+                  }
+                  return null;
+                },
+                onSaved: (value) => _formData['contact'] = value!,
               ),
             ],
           ),

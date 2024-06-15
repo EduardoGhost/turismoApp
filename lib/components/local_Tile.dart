@@ -17,7 +17,7 @@ class Local_Tile extends StatelessWidget{
         : CircleAvatar(backgroundImage: NetworkImage(localTuristico.image));
     return ListTile(
       leading: image,
-      title: Text(localTuristico.name),
+      title: Text(localTuristico.name, style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(localTuristico.description),
       trailing: Container(
         width: 100,
