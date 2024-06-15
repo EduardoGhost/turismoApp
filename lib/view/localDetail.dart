@@ -10,6 +10,15 @@ class localDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detalhes do local"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // implements
+
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Padding(

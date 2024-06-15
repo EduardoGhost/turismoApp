@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/dashboard',
       routes: {
-        AppRouters.DASHBOARD: (_) => dashboard(),
+        AppRouters.DASHBOARD: (_) => Dashboard(),
         AppRouters.HOME: (_) => userList(),
         AppRouters.USER_FORM: (_) => userForm(),
         AppRouters.USER_DETAILS: (_) => userDetail(),

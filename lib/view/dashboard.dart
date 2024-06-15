@@ -4,20 +4,25 @@ import '../components/local_Tile.dart';
 import '../providers/locaisTuristicosProvider.dart';
 import '../routers/app_routers.dart';
 
-class dashboard extends StatelessWidget{
-
+class Dashboard extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final LocalTuristicoProviders localTuristico = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Locais turisticos'),
+        title: const Text('Locais turísticos'),
         actions: <Widget>[
-          //add local turistico
-          IconButton(icon: Icon(Icons.add),
+          IconButton(
+            icon: const Icon(Icons.notifications),
             onPressed: () {
-              Navigator.of(context).pushNamed(
-                  AppRouters.LOCALTURISTICO_FORM);
+              // implementar metodo notificação
+
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRouters.LOCALTURISTICO_FORM);
             },
           ),
         ],
@@ -29,7 +34,6 @@ class dashboard extends StatelessWidget{
           child: Local_Tile(localTuristico.byIndex(i)),
         ),
       ),
-
     );
   }
 }
