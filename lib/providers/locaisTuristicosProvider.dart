@@ -45,6 +45,8 @@ class LocalTuristicoProviders with ChangeNotifier {
         local: localTuristico.local,
         hours: localTuristico.hours,
         contact: localTuristico.contact,
+        latitude: localTuristico.latitude,
+        longitude: localTuristico.longitude,
       ));
 
       await _locaisRepository.updateLocalTuristico(localTuristico);
@@ -58,6 +60,8 @@ class LocalTuristicoProviders with ChangeNotifier {
         local: localTuristico.local,
         hours: localTuristico.hours,
         contact: localTuristico.contact,
+        latitude: localTuristico.latitude,
+        longitude: localTuristico.longitude,
       );
       _items[id] = newLocal;
       await _locaisRepository.insertLocalTuristico(newLocal);

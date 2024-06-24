@@ -7,6 +7,8 @@ class LocalTuristico {
   //implementar metodo para horario de abertura e fechamento
   String hours;
   String contact;
+  String latitude;
+  String longitude;
 
   LocalTuristico({
     required this.id,
@@ -16,6 +18,8 @@ class LocalTuristico {
     required this.local,
     required this.hours,
     required this.contact,
+    required this.latitude,
+    required this.longitude,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +31,8 @@ class LocalTuristico {
       'local': local,
       'hours': hours,
       'contact' : contact,
+      'latitude' : latitude,
+      'longitude' : longitude,
     };
   }
 
@@ -38,7 +44,10 @@ class LocalTuristico {
       image: map['image'],
       local: map['local'],
       hours: map['hours'],
-      contact: map['contact']
+      contact: map['contact'],
+      latitude: map['latitude'],
+      longitude: map['longitude'],
+
     );
   }
 }

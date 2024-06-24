@@ -23,7 +23,7 @@ class LocalTuristicoDatabaseHelper {
       join(await getDatabasesPath(), 'local_turistico_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE locais_turisticos(id TEXT PRIMARY KEY, name TEXT, description TEXT, image TEXT, local TEXT, hours TEXT, contact TEXT)",
+          "CREATE TABLE locais_turisticos(id TEXT PRIMARY KEY, name TEXT, description TEXT, image TEXT, local TEXT, hours TEXT, contact TEXT, latitude TEXT, longitude TEXT)",
         );
       },
       version: 1,

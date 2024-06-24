@@ -1,13 +1,20 @@
+import 'package:AppTuristico/view/webViewScreen/SelectLocationPage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../models/localTuristico.dart';
 import '../providers/locaisTuristicosProvider.dart';
 
-class LocalTuristicoForm extends StatelessWidget {
+
+class LocalTuristicoForm extends StatefulWidget {
+  @override
+  _LocalTuristicoFormState createState() => _LocalTuristicoFormState();
+}
+
+class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
-
-  LocalTuristicoForm({super.key});
+  LatLng? _selectedLocation;
 
   void _loadFormData(LocalTuristico? local) {
     if (local != null) {
@@ -18,6 +25,10 @@ class LocalTuristicoForm extends StatelessWidget {
       _formData['location'] = local.local;
       _formData['hours'] = local.hours;
       _formData['contact'] = local.contact;
+
+      if (local.latitude.isNotEmpty && local.longitude.isNotEmpty) {
+        _selectedLocation = LatLng(double.parse(local.latitude), double.parse(local.longitude));
+      }
     }
   }
 
@@ -34,7 +45,6 @@ class LocalTuristicoForm extends StatelessWidget {
             icon: Icon(Icons.save),
             onPressed: () {
               final isValid = _form.currentState!.validate();
-
               if (isValid) {
                 _form.currentState?.save();
 
@@ -43,10 +53,13 @@ class LocalTuristicoForm extends StatelessWidget {
                     id: _formData['id'] ?? '',
                     name: _formData['name'] ?? '',
                     description: _formData['description'] ?? '',
-                    image: _formData['imageUrl'] ?? '',
+                    image: _formData['image'] ?? '',
                     local: _formData['location'] ?? '',
                     hours: _formData['hours'] ?? '',
                     contact: _formData['contact'] ?? '',
+
+                    latitude: _selectedLocation?.latitude.toString() ?? "0.0",
+                    longitude: _selectedLocation?.longitude.toString() ?? "0.0",
                   ),
                 );
 
@@ -88,20 +101,9 @@ class LocalTuristicoForm extends StatelessWidget {
                 onSaved: (value) => _formData['description'] = value!,
               ),
               TextFormField(
-                initialValue: _formData['imageUrl'],
+                initialValue: _formData['image'],
                 decoration: InputDecoration(labelText: "URL da Imagem"),
-                onSaved: (value) => _formData['imageUrl'] = value!,
-              ),
-              TextFormField(
-                initialValue: _formData['location'],
-                decoration: InputDecoration(labelText: "Localização"),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Localização inválida";
-                  }
-                  return null;
-                },
-                onSaved: (value) => _formData['location'] = value!,
+                onSaved: (value) => _formData['image'] = value!,
               ),
               TextFormField(
                 initialValue: _formData['hours'],
@@ -125,6 +127,23 @@ class LocalTuristicoForm extends StatelessWidget {
                 },
                 onSaved: (value) => _formData['contact'] = value!,
               ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  final selectedLocation = await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SelectLocationPage(),
+                    ),
+                  );
+                  setState(() {
+                    _selectedLocation = selectedLocation;
+                  });
+                },
+                child: Text('Selecionar Localização no Mapa'),
+              ),
+              if (_selectedLocation != null)
+                Text(
+                    'Localização selecionada: (${_selectedLocation!.latitude}, ${_selectedLocation!.longitude})'),
             ],
           ),
         ),
