@@ -6,6 +6,10 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+def GOOGLE_MAPS_API_KEY = localProperties.getProperty('GOOGLE_MAPS_API_KEY')
+
+
+
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -52,6 +56,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        resValue "string", "google_maps_api_key", GOOGLE_MAPS_API_KEY
     }
 
     buildTypes {
