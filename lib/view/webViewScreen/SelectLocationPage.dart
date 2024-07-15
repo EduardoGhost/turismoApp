@@ -53,11 +53,27 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
     }
   }
 
+  void _onMapTap(LatLng latLng) {
+    setState(() {
+      _selectedLocation = latLng;
+    });
+  }
+
+  void _onConfirmLocation() {
+    Navigator.of(context).pop(_selectedLocation);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Selecione a Localização'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: _onConfirmLocation,
+          ),
+        ],
       ),
       body: _loading
           ? Center(child: CircularProgressIndicator())
@@ -75,14 +91,7 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
             position: _selectedLocation,
           ),
         },
-        onTap: (latLng) {
-          setState(() {
-            _selectedLocation = latLng;
-          });
-          mapController.animateCamera(
-            CameraUpdate.newLatLng(latLng),
-          );
-        },
+        onTap: _onMapTap,
       ),
     );
   }

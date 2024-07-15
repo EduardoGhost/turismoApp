@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../models/localTuristico.dart';
 import '../providers/locaisTuristicosProvider.dart';
 
-
 class LocalTuristicoForm extends StatefulWidget {
   @override
   _LocalTuristicoFormState createState() => _LocalTuristicoFormState();
@@ -34,9 +33,6 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
 
   @override
   Widget build(BuildContext context) {
-    final local = ModalRoute.of(context)?.settings.arguments as LocalTuristico?;
-    _loadFormData(local);
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Formulário de Locais Turísticos"),
@@ -48,6 +44,14 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
               if (isValid) {
                 _form.currentState?.save();
 
+                // Verifique se a localização foi selecionada
+                if (_selectedLocation == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Por favor, selecione uma localização no mapa.')),
+                  );
+                  return;
+                }
+
                 Provider.of<LocalTuristicoProviders>(context, listen: false).put(
                   LocalTuristico(
                     id: _formData['id'] ?? '',
@@ -57,9 +61,8 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
                     local: _formData['location'] ?? '',
                     hours: _formData['hours'] ?? '',
                     contact: _formData['contact'] ?? '',
-
-                    latitude: _selectedLocation?.latitude.toString() ?? "0.0",
-                    longitude: _selectedLocation?.longitude.toString() ?? "0.0",
+                    latitude: _selectedLocation!.latitude.toString(),
+                    longitude: _selectedLocation!.longitude.toString(),
                   ),
                 );
 
@@ -135,15 +138,18 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
                       builder: (context) => SelectLocationPage(),
                     ),
                   );
-                  setState(() {
-                    _selectedLocation = selectedLocation;
-                  });
+                  if (selectedLocation != null) {
+                    setState(() {
+                      _selectedLocation = selectedLocation;
+                    });
+                  }
                 },
                 child: Text('Selecionar Localização no Mapa'),
               ),
               if (_selectedLocation != null)
                 Text(
-                    'Localização selecionada: (${_selectedLocation!.latitude}, ${_selectedLocation!.longitude})'),
+                  'Localização selecionada: (${_selectedLocation!.latitude}, ${_selectedLocation!.longitude})',
+                ),
             ],
           ),
         ),
