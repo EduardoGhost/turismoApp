@@ -1,10 +1,13 @@
-import 'dart:math';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import '../data/localTuristicoRepository.dart';
 import '../models/localTuristico.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LocalTuristicoProviders with ChangeNotifier {
+  final String _baseUrl = dotenv.env['FIREBASE_URL'] ?? '';
   final Map<String, LocalTuristico> _items = {};
   final LocalTuristicoRepository _locaisRepository = LocalTuristicoRepository();
 
@@ -51,7 +54,21 @@ class LocalTuristicoProviders with ChangeNotifier {
 
       await _locaisRepository.updateLocalTuristico(localTuristico);
     } else {
-      final id = Random().nextDouble().toString();
+      final response = await http.post(
+          Uri.parse("$_baseUrl/LocalTuristico.json"),
+          body: json.encode({
+            'name': localTuristico.name,
+            'description': localTuristico.description,
+            'image': localTuristico.image,
+            'local': localTuristico.local,
+            'hours': localTuristico.hours,
+            'contact': localTuristico.contact,
+            'latitude': localTuristico.latitude,
+            'longitude': localTuristico.longitude,
+
+      }));
+      final id = jsonDecode(response.body)["name"];
+
       final newLocal = LocalTuristico(
         id: id,
         name: localTuristico.name,
