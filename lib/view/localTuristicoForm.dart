@@ -14,6 +14,7 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
   LatLng? _selectedLocation;
+  bool _isLoading = false;
 
   void _loadFormData(LocalTuristico? local) {
     if (local != null) {
@@ -39,11 +40,14 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () {
+            onPressed: () async {
               final isValid = _form.currentState!.validate();
               if (isValid) {
                 _form.currentState?.save();
 
+                setState(() {
+                  _isLoading = true;
+                });
                 // Verifique se a localização foi selecionada
                 if (_selectedLocation == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -52,7 +56,7 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
                   return;
                 }
 
-                Provider.of<LocalTuristicoProviders>(context, listen: false).put(
+                await Provider.of<LocalTuristicoProviders>(context, listen: false).put(
                   LocalTuristico(
                     id: _formData['id'] ?? '',
                     name: _formData['name'] ?? '',
@@ -66,13 +70,18 @@ class _LocalTuristicoFormState extends State<LocalTuristicoForm> {
                   ),
                 );
 
+                setState(() {
+                  _isLoading = false;
+                });
+
                 Navigator.of(context).pop();
               }
             },
           ),
         ],
       ),
-      body: Padding(
+      body: _isLoading ? Center(child: CircularProgressIndicator())
+      :Padding(
         padding: EdgeInsets.all(15),
         child: Form(
           key: _form,
