@@ -88,9 +88,22 @@ class LocalTuristicoProviders with ChangeNotifier {
 
   Future<void> remove(LocalTuristico localTuristico) async {
     if (localTuristico != null && localTuristico.id.isNotEmpty) {
-      _items.remove(localTuristico.id);
-      await _locaisRepository.deleteLocalTuristico(localTuristico.id);
-      notifyListeners();
+      try {
+        // Remove do Firebase
+        await http.delete(Uri.parse("$_baseUrl/LocalTuristico/${localTuristico.id}.json"));
+
+        // Remove do banco de dados local
+        await _locaisRepository.deleteLocalTuristico(localTuristico.id);
+
+        // Remove da memória local
+        _items.remove(localTuristico.id);
+
+        // Notifica ouvintes sobre a mudança
+        notifyListeners();
+      } catch (e) {
+        print('Erro ao remover local turístico: $e');
+      }
     }
   }
+
 }
